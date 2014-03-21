@@ -13,17 +13,17 @@ import time
 from math import ceil, log  # needed for basepoints calculation
 from optparse import make_option
 
+from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
 import khanload
-import settings
+from fle_utils.general import datediff
+from kalite.settings import LOG as logging
 from main import topic_tools
-from settings import LOG as logging
-from utils.general import datediff
 
 
 # get the path to an exercise file, so we can check, below, which ones exist
-exercise_path = os.path.join(settings.PROJECT_PATH, "static/js/khan-exercises/exercises/%s.html")
+EXERCISE_FILEPATH_TEMPLATE = os.path.join(settings.KHAN_EXERCISES_DIRPATH, "exercises", "%s.html")
 
 slug_key = {
     "Topic": "node_slug",
@@ -248,7 +248,7 @@ def rebuild_topictree(remove_unknown_exercises=False, remove_disabled_topics=Tru
         for ci, child in enumerate(node.get("children", [])):
             # Mark all unrecognized exercises for deletion
             if child["kind"] == "Exercise":
-                if not os.path.exists(exercise_path % child["slug"]):
+                if not os.path.exists(EXERCISE_FILEPATH_TEMPLATE % child["slug"]):
                     children_to_delete.append(ci)
 
             # Recurse over children to delete
@@ -554,7 +554,7 @@ def validate_data(topic_tree, node_cache, slug2id_map, knowledge_map):
     # Validate related videos
     for exercise_nodes in node_cache['Exercise'].values():
         exercise = exercise_nodes[0]
-        exercise_path = os.path.join(settings.PROJECT_PATH, "static", "js", "khan-exercises", "exercises", "%s.html" % exercise["slug"])
+        exercise_path = EXERCISE_FILEPATH_TEMPLATE % exercise["slug"]
         if not os.path.exists(exercise_path):
             sys.stderr.write("Could not find exercise HTML file: %s\n" % exercise_path)
         for vid_slug in exercise.get("related_video_slugs", []):
