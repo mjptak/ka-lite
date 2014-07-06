@@ -1,6 +1,24 @@
 [
   {
     "title":
+      "Playlist P1: Demo Playlist for Ms. P's Math Adventure",
+    "id": "gp_p1",
+    "tag": "Grade P",
+    "entries": [
+      {
+        "entity_id": "Subtitle: Week 1",
+        "sort_order": 0,
+        "entity_kind": "Divider"
+      },
+      {
+        "entity_id": "/e/place_value/",
+        "sort_order": 5,
+        "entity_kind": "Exercise"
+      }
+    ]
+  },
+  {
+    "title":
       "Playlist 1: Read/write 4 digit numbers, place value and face value, expanded form of numbers",
     "id": "g3_p1",
     "tag": "Grade 3",
