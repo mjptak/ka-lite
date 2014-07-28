@@ -1,1 +1,6 @@
-{"playlist_ids": ["pt1_p1", "pt1_p2"], "repeats": 2, "seed": 3341, "ids": ["mjp_exercise_001","mjp_exercise_003","mjp_exercise_004","mjp_exercise_006"], "title": "grade0: Unit test 0 "}
+{
+  "id": "99_practice",
+  "title": "grade0: Unit test 0 - Practice ",
+  "seed": 3570,
+"playlist_ids": ["pt1_p1", "pt1_p2"], 
+"repeats": 2, "seed": 3341, "ids": ["mjp_exercise_001","mjp_exercise_003","mjp_exercise_004","mjp_exercise_006"]}
